@@ -145,6 +145,9 @@ export default {
 
 .map {
   @include container($container-inner-padding);
+  position: fixed;
+  right: 0;
+  width: 50%;
 
   &__content {
     display: flex;

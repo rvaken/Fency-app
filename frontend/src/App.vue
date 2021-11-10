@@ -2,6 +2,7 @@
   <div id="app">
     <GridDebug />
     <Navbar />
+
     <router-view />
   </div>
 </template>

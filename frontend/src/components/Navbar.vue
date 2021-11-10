@@ -26,12 +26,7 @@
           </div>
         </div>
       </div>
-      <div class="content__credits credits">
-        <span class="credits__text">
-          <font-awesome-icon class="credits__text--icon" icon="copyright" />
-          Robbe Van Aken
-        </span>
-      </div>
+      <div class="content__credits"></div>
     </div>
   </section>
 </template>
@@ -39,6 +34,7 @@
 <script>
 export default {
   name: "Navbar",
+  components: {},
 
   data() {
     return {
@@ -90,6 +86,9 @@ export default {
 @import "@/assets/imports/variables.scss";
 
 .navbar {
+  &.active {
+    display: block;
+  }
   position: fixed;
   left: 0;
   top: 0;
