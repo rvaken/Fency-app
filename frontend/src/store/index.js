@@ -14,9 +14,17 @@ export default new Vuex.Store({
     },
   },
 
-  mutations: {},
+  mutations: {
+    SET_LENGTH(state, value) {
+      state.length = value;
+    },
+  },
 
-  actions: {},
+  actions: {
+    setLength({ commit }, payload) {
+      commit("SET_LENGTH", payload);
+    },
+  },
 
   modules: {},
 });

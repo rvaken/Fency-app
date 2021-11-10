@@ -140,7 +140,7 @@ export default {
     },
 
     orderFences() {
-      console.log(this.distance);
+      this.$store.dispatch("setLength", this.distance);
     },
 
     closeFence() {
