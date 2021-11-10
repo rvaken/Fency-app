@@ -30,6 +30,7 @@
             :key="button.id"
             @click="button.function"
             class="button-element"
+            :class="button.style"
           >
             <p>{{ button.text }}</p>
           </div>
@@ -70,6 +71,14 @@ export default {
           id: 1,
           function: this.clearMarkers,
           text: "Clear",
+          style: "red",
+        },
+
+        {
+          id: 2,
+          function: this.orderFences,
+          text: "Order",
+          style: "green",
         },
       ],
     };
@@ -105,6 +114,10 @@ export default {
   methods: {
     clearMarkers() {
       this.markers = [];
+    },
+
+    orderFences() {
+      console.log(this.distance);
     },
 
     mapClicked(event) {
@@ -155,7 +168,7 @@ export default {
           .button-element {
             margin: 25px;
             border-radius: 40px;
-            background-color: $red;
+
             transition: 0.3s;
             p {
               text-align: center;
@@ -170,6 +183,14 @@ export default {
               @include shadow;
               transform: scale(1.05);
               transition: 0.3s;
+            }
+
+            &.red {
+              background-color: $red;
+            }
+
+            &.green {
+              background-color: $green;
             }
           }
         }

@@ -5,30 +5,18 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    placedMarker: {},
-    markers: [],
+    length: 0,
   },
 
   getters: {
-    getPlacedMarker: (state) => {
-      return state.placedMarker;
-    },
-
-    getMarkers: (state) => {
-      return state.markers;
+    getLength: (state) => {
+      return state.length;
     },
   },
 
-  mutations: {
-    ADD_MARKER(state, x) {
-      state.markers.push(x);
-    },
-  },
+  mutations: {},
 
-  actions: {
-    addToMarkers({ commit }, payload) {
-      commit("ADD_MARKER", payload.placedMarker);
-    },
-  },
+  actions: {},
+
   modules: {},
 });
