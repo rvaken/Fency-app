@@ -22,7 +22,14 @@
 
       <div class="content__controller">
         <div class="controller-display">
-          <p>{{ distance }}m</p>
+          <p>
+            <animated-number
+              :value="distance"
+              :duration="duration"
+              :format-value="formatToWholes"
+            />
+            m
+          </p>
         </div>
         <div class="controller-buttons">
           <div
@@ -44,6 +51,7 @@
 // import { latLng } from "leaflet";
 import { LMap, LTileLayer, LMarker, LPolyline } from "vue2-leaflet";
 import { Icon } from "leaflet";
+import AnimatedNumber from "animated-number-vue";
 
 delete Icon.Default.prototype._getIconUrl;
 Icon.Default.mergeOptions({
@@ -55,7 +63,7 @@ Icon.Default.mergeOptions({
 export default {
   name: "Map",
 
-  components: { LMap, LTileLayer, LMarker, LPolyline },
+  components: { LMap, LTileLayer, LMarker, LPolyline, AnimatedNumber },
 
   data() {
     return {
@@ -66,6 +74,7 @@ export default {
         '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
 
       markers: [],
+      duration: 200,
       buttons: [
         {
           id: 1,
@@ -122,6 +131,10 @@ export default {
 
     mapClicked(event) {
       this.markers.push(event.latlng);
+    },
+
+    formatToWholes(number) {
+      return `${Number(number).toFixed(2)}</h1>`;
     },
   },
 };
