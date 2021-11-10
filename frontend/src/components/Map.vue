@@ -141,6 +141,7 @@ export default {
 
     orderFences() {
       this.$store.dispatch("setLength", this.distance);
+      this.markers = [];
     },
 
     closeFence() {
