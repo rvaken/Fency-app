@@ -1,0 +1,229 @@
+// Import
+
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+// ------ Debugg ------
+// ----> Element Debugger
+// * {
+//   background-color: rgba(255, 0, 0, 0.1);
+//   outline: 1px solid red;
+//   z-index: 0;
+// }
+
+// ----> Dimension Values
+
+$min-width: 320px;
+$max-width: 1786px;
+$inner-width: 1338px;
+$section-margin: 6em 0em;
+$container-inner-padding: 86px + 96px + 42px;
+$container-outer-padding: 86px + 42px;
+$container-small-padding: 86px + 96px + 42px + 96px + 42px;
+$content-outer-padding: 42px;
+$content-inner-padding: 96px;
+
+// ----> Font Values
+
+$main-font: "Rubik", sans-serif;
+$smallest-font-size: 10px;
+$lang-font-size: 12px;
+$menu-font-size: 14px;
+$smaller-font-size: 17px;
+$small-lang-size: 18px;
+$nav-font-size: 20px;
+$mobile-font-size: 21px;
+$small-font-size: 22px;
+$mobile-sum-size: 23px;
+$middle-font-size: 26px;
+$model-font-size: 28px;
+$mobile-title-size: 30px;
+$mobile-sub-size: 32px;
+$mobile-bigger-title: 34px;
+$subtitle-font-size: 38px;
+$mobile-highlight-size: 40px;
+$title-font-size: 44px;
+$big-title-font-size: 48px;
+$mobile-title-font-size: 54px;
+$large-modal-font-size: 60px;
+$bigger-title-font-size: 64px;
+$small-hero-font: 100px;
+$hero-font-size: 130px;
+$large-font-size: 160px;
+
+// ----> Colors
+
+$white: white;
+$dark: #233d4d;
+$opac-dark: #233d4d6e;
+$dark-green: #0081a7;
+$green: #00afb9;
+$yellow: #fdfcdc;
+$orange: #fed9b7;
+$red: #f07167;
+
+// Mixins
+@mixin container($padding) {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: 0 $padding;
+}
+
+@mixin content($padding) {
+  padding: 0 $padding;
+  text-align: left;
+}
+
+@mixin gridContainer() {
+  display: grid;
+  grid-gap: 42px;
+  grid-template-columns: repeat(10, 96px);
+  margin: 0 auto;
+  width: 100%;
+  // width: $max-width;
+}
+
+@mixin mobileGrid() {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(4, 78px);
+  margin: 0 auto;
+  width: 100%;
+}
+
+@mixin wideGridContainer() {
+  display: grid;
+  grid-gap: 42px;
+  grid-template-columns: repeat(12, 96px);
+  margin: 0 auto;
+  width: 100%;
+  // max-width: $max-width;
+}
+
+@mixin largePhoto() {
+  width: 565px;
+  height: 772px;
+}
+
+@mixin shadow() {
+  -webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.35);
+  -moz-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.35);
+  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.35);
+}
+
+@mixin shadowHover() {
+  -webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.55);
+  -moz-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.55);
+  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.55);
+}
+
+@mixin grayScale {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+}
+
+@mixin button($color, $hoverColor) {
+  @include plainText($color);
+  border: none;
+  background: transparent;
+  transition: 0.3s;
+  &:hover {
+    cursor: pointer;
+    color: $hoverColor;
+    transition: 0.3s;
+    text-decoration: none;
+  }
+}
+
+// Media queries
+
+@mixin breakpoint_mobile {
+  @media (max-width: 320px) {
+    @content;
+  }
+}
+@mixin breakpoint_mobile__landscape {
+  @media (max-width: 470px) {
+    @content;
+  }
+}
+@mixin breakpoint_tablet {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+@mixin breakpoint_tablet_landscape {
+  @media (max-width: 1024px) {
+    @content;
+  }
+}
+@mixin breakpoint_desktop {
+  @media (max-width: 1240px) {
+    @content;
+  }
+}
+@mixin breakpoint_desktop_wide {
+  @media (max-width: 1680px) {
+    @content;
+  }
+}
+
+@mixin breakpoint_container {
+  @media (max-width: 1786px) {
+    @content;
+  }
+}
+
+@mixin breakpoint_desktop_xwide {
+  @media (max-width: 2060px) {
+    @content;
+  }
+}
+
+// Fonts
+
+@import url("https://p.typekit.net/p.css?s=1&k=tpf6dio&ht=tk&f=10294.10295.10296.10297&a=19560328&app=typekit&e=css");
+
+@mixin subtitle() {
+  font-family: $main-font;
+  font-weight: 700;
+  font-style: normal;
+  font-size: $title-font-size;
+  color: $dark-blue;
+}
+
+@mixin plainText($color) {
+  font-family: $main-font;
+  font-weight: 400;
+  font-style: normal;
+  font-size: $small-font-size;
+  color: $color;
+  line-height: 140%;
+}
+
+@mixin light-font() {
+  font-family: $main-font;
+  font-weight: 200;
+  font-style: normal;
+}
+
+@mixin normal-font() {
+  font-family: $main-font;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@mixin italic-font() {
+  font-family: $main-font;
+  font-weight: 400;
+  font-style: italic;
+}
+@mixin bold-normal-font() {
+  font-family: $main-font;
+  font-weight: 700;
+  font-style: normal;
+}
+@mixin bold-italic-font() {
+  font-family: $main-font;
+  font-weight: 700;
+  font-style: italic;
+}

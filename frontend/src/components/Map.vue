@@ -1,0 +1,180 @@
+<template>
+  <section class="map">
+    <div class="map__content content">
+      <l-map
+        class="content__leaflet"
+        :zoom="zoom"
+        :center="center"
+        @click="mapClicked"
+        style="height: 70vh; width: 100%"
+      >
+        <l-tile-layer :url="url" :attribution="attribution" />
+        <l-polyline :lat-lngs="this.polyline" color="#f07167"></l-polyline>
+
+        <l-marker
+          class="leaflet-icon"
+          v-for="marker in markers"
+          :key="marker.index"
+          :lat-lng="marker"
+          iconUrl="@/assets/images/icon-marker.svg"
+        ></l-marker>
+      </l-map>
+
+      <div class="content__controller">
+        <div class="controller-display">
+          <p>{{ distance }}m</p>
+        </div>
+        <div class="controller-buttons">
+          <div
+            v-for="button in buttons"
+            :key="button.id"
+            @click="button.function"
+            class="button-element"
+          >
+            <p>{{ button.text }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
+
+<script>
+// import { latLng } from "leaflet";
+import { LMap, LTileLayer, LMarker, LPolyline } from "vue2-leaflet";
+import { Icon } from "leaflet";
+
+delete Icon.Default.prototype._getIconUrl;
+Icon.Default.mergeOptions({
+  iconRetinaUrl: require("@/assets/images/marker-icon.svg"),
+  iconUrl: require("@/assets/images/marker-icon.svg"),
+  shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
+});
+
+export default {
+  name: "Map",
+
+  components: { LMap, LTileLayer, LMarker, LPolyline },
+
+  data() {
+    return {
+      zoom: 18,
+      center: [51.0543, 3.7174],
+      url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+      attribution:
+        '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+
+      markers: [],
+      buttons: [
+        {
+          id: 1,
+          function: this.clearMarkers,
+          text: "Clear",
+        },
+      ],
+    };
+  },
+
+  computed: {
+    distance() {
+      var l = 0;
+
+      if (this.markers.length > 1) {
+        for (let j = 1; j < this.markers.length; j++) {
+          let m = Math.sqrt(
+            (this.markers[j].lat - this.markers[j - 1].lat) ** 2 +
+              (this.markers[j].lng - this.markers[j - 1].lng) ** 2
+          );
+
+          l += m;
+        }
+      }
+      return (l * 100000).toFixed(2);
+    },
+
+    polyline() {
+      let x = [];
+      for (let i = 0; i < this.markers.length; i++) {
+        x.push(this.markers[i]);
+      }
+
+      return x;
+    },
+  },
+
+  methods: {
+    clearMarkers() {
+      this.markers = [];
+    },
+
+    mapClicked(event) {
+      this.markers.push(event.latlng);
+    },
+  },
+};
+</script>
+
+<style lang="scss">
+@import "@/assets/imports/variables.scss";
+
+.map {
+  @include container($container-inner-padding);
+
+  &__content {
+    display: flex;
+    align-items: center;
+
+    .content {
+      &__leaflet {
+        border: solid 2px $opac-dark;
+        min-width: 320px;
+
+        &:hover {
+          cursor: cell;
+        }
+      }
+
+      &__controller {
+        width: 35%;
+        height: 70vh;
+        border: solid 2px $opac-dark;
+        background-color: $dark;
+
+        .controller-display {
+          border: solid 2px #fff;
+          margin: 25px;
+          border-radius: 40px;
+          p {
+            color: #fff;
+            font-family: $main-font;
+            font-size: 20px;
+          }
+        }
+
+        .controller-buttons {
+          .button-element {
+            margin: 25px;
+            border-radius: 40px;
+            background-color: $red;
+            transition: 0.3s;
+            p {
+              text-align: center;
+              padding: 15px 30px;
+              color: #fff;
+              font-family: $main-font;
+              font-size: 20px;
+            }
+
+            &:hover {
+              cursor: pointer;
+              @include shadow;
+              transform: scale(1.05);
+              transition: 0.3s;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+</style>
