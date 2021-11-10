@@ -1,6 +1,17 @@
 <template>
   <section class="map">
     <div class="map__content">
+      <div class="content__materials">
+        <div class="materials-container">
+          <div class="materials-buttons">
+            <div
+              v-for="material in materials"
+              :key="material.id"
+              class="button-item"
+            ></div>
+          </div>
+        </div>
+      </div>
       <Hamburger
         class="menu-burger"
         @click.native="menu_toggle = !menu_toggle"
@@ -100,8 +111,24 @@ export default {
         {
           id: 2,
           function: this.orderFences,
-          text: "Order",
+          text: "Confirm",
           style: "green",
+        },
+      ],
+
+      materials: [
+        {
+          id: 1,
+          name: "Wood",
+          image: "wood.jpg",
+          price: "€1/m",
+        },
+
+        {
+          id: 2,
+          name: "Steel",
+          image: "steel.jpg",
+          price: "€10/m",
         },
       ],
     };
@@ -180,6 +207,23 @@ export default {
       right: 25px;
       top: 25px;
       z-index: 999;
+    }
+
+    .content__materials {
+      position: absolute;
+      transform: translateX(-100%);
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: $opac-dark;
+
+      .materials-container {
+        .materials-buttons {
+          .button-item {
+          }
+        }
+      }
     }
 
     .content__leaflet {

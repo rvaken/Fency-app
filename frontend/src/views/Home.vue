@@ -1,7 +1,8 @@
 <template>
   <div class="home">
     <FenceCart class="cart" />
-    <Map class="home__map" />
+
+    <Map class="home-map" />
   </div>
 </template>
 
@@ -24,7 +25,11 @@ export default {
   padding: 0;
   .cart {
   }
-  &__map {
+
+  .materials {
+  }
+
+  .home-map {
     position: fixed;
     bottom: 0;
     right: 0;
