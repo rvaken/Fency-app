@@ -1,6 +1,10 @@
 <template>
   <section class="map">
-    <div class="map__content content">
+    <div class="map__content">
+      <Hamburger
+        class="menu-burger"
+        @click.native="menu_toggle = !menu_toggle"
+      />
       <l-map
         class="content__leaflet"
         :zoom="zoom"
@@ -16,11 +20,12 @@
           v-for="marker in markers"
           :key="marker.index"
           :lat-lng="marker"
+          @click="closeFence"
           iconUrl="@/assets/images/icon-marker.svg"
         ></l-marker>
       </l-map>
 
-      <div class="content__controller">
+      <div :class="{ active: menu_toggle }" class="content__controller">
         <div class="controller-display">
           <p>
             <animated-number
@@ -52,6 +57,7 @@
 import { LMap, LTileLayer, LMarker, LPolyline } from "vue2-leaflet";
 import { Icon } from "leaflet";
 import AnimatedNumber from "animated-number-vue";
+import Hamburger from "./Hamburger.vue";
 
 delete Icon.Default.prototype._getIconUrl;
 Icon.Default.mergeOptions({
@@ -63,7 +69,14 @@ Icon.Default.mergeOptions({
 export default {
   name: "Map",
 
-  components: { LMap, LTileLayer, LMarker, LPolyline, AnimatedNumber },
+  components: {
+    LMap,
+    LTileLayer,
+    LMarker,
+    LPolyline,
+    AnimatedNumber,
+    Hamburger,
+  },
 
   data() {
     return {
@@ -75,6 +88,7 @@ export default {
 
       markers: [],
       duration: 200,
+      menu_toggle: false,
       buttons: [
         {
           id: 1,
@@ -129,6 +143,12 @@ export default {
       console.log(this.distance);
     },
 
+    closeFence() {
+      if (this.markers.length > 2) {
+        this.markers.push(this.markers[0]);
+      }
+    },
+
     mapClicked(event) {
       this.markers.push(event.latlng);
     },
@@ -144,69 +164,94 @@ export default {
 @import "@/assets/imports/variables.scss";
 
 .map {
-  @include container($container-inner-padding);
-  position: fixed;
-  right: 0;
-  width: 50%;
+  @include container(0);
+  width: 60%;
 
   &__content {
     display: flex;
     align-items: center;
 
-    .content {
-      &__leaflet {
-        border: solid 2px $opac-dark;
-        min-width: 320px;
+    position: relative;
 
-        &:hover {
-          cursor: cell;
+    .menu-burger {
+      position: absolute;
+      right: 25px;
+      top: 25px;
+      z-index: 999;
+    }
+
+    .content__leaflet {
+      border: solid 2px $opac-dark;
+
+      &:hover {
+        cursor: cell;
+      }
+    }
+
+    .content__controller {
+      display: flex;
+      flex-direction: column-reverse;
+      position: absolute;
+      overflow: hidden;
+      right: 0;
+      transition: transform 0.3s ease;
+      transform: translateX(100%);
+      z-index: 998;
+
+      &.active {
+        transform: translateX(0);
+      }
+
+      width: 25%;
+      min-width: 200px;
+      height: 70vh;
+      border: solid 2px $opac-dark;
+      background-color: $dark;
+
+      .controller-display {
+        border: solid 2px #fff;
+        margin: 25px;
+        border-radius: 40px;
+        p {
+          color: #fff;
+          font-family: $main-font;
+          font-size: 20px;
         }
       }
 
-      &__controller {
-        width: 35%;
-        height: 70vh;
-        border: solid 2px $opac-dark;
-        background-color: $dark;
-
-        .controller-display {
-          border: solid 2px #fff;
+      .controller-buttons {
+        .button-element {
           margin: 25px;
           border-radius: 40px;
+
+          transition: 0.3s;
           p {
+            text-align: center;
+            padding: 15px 30px;
             color: #fff;
             font-family: $main-font;
             font-size: 20px;
           }
-        }
 
-        .controller-buttons {
-          .button-element {
-            margin: 25px;
-            border-radius: 40px;
-
+          &:hover {
+            cursor: pointer;
+            @include shadow;
+            transform: scale(1.05);
             transition: 0.3s;
+          }
+
+          &.red {
+            background-color: $red;
+          }
+
+          &.green {
+            background-color: $green;
+          }
+          &.yellow {
+            background-color: $orange;
+
             p {
-              text-align: center;
-              padding: 15px 30px;
-              color: #fff;
-              font-family: $main-font;
-              font-size: 20px;
-            }
-
-            &:hover {
-              cursor: pointer;
-              @include shadow;
-              transform: scale(1.05);
-              transition: 0.3s;
-            }
-
-            &.red {
-              background-color: $red;
-            }
-
-            &.green {
-              background-color: $green;
+              color: $dark;
             }
           }
         }

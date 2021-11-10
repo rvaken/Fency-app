@@ -20,7 +20,9 @@ export default {
 
 .home {
   &__map {
-    margin-top: 2rem;
+    position: fixed;
+    bottom: 0;
+    right: 0;
   }
 }
 </style>

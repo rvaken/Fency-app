@@ -27,7 +27,7 @@ export default {
 <style lang="scss">
 .hamburger {
   padding: 15px;
-  background-color: $red;
+  background-color: $green;
   border-radius: 50%;
 
   &:hover {
