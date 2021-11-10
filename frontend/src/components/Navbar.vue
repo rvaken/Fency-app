@@ -26,7 +26,6 @@
           </div>
         </div>
       </div>
-      <div class="content__credits"></div>
     </div>
   </section>
 </template>
@@ -151,20 +150,6 @@ export default {
                   }
                 }
               }
-            }
-          }
-        }
-      }
-
-      &__credits {
-        position: fixed;
-        bottom: 0;
-        margin: 50px;
-        .credits {
-          &__text {
-            @include plainText($white);
-            font-size: $smallest-font-size;
-            &--icon {
             }
           }
         }

@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <FenceCart class="cart" />
     <Map class="home__map" />
   </div>
 </template>
@@ -8,10 +9,11 @@
 // @ is an alias to /src
 
 import Map from "../components/Map.vue";
+import FenceCart from "../components/FenceCart.vue";
 
 export default {
   name: "Home",
-  components: { Map },
+  components: { Map, FenceCart },
 };
 </script>
 
@@ -19,6 +21,9 @@ export default {
 @import "@/assets/imports/variables.scss";
 
 .home {
+  padding: 0;
+  .cart {
+  }
   &__map {
     position: fixed;
     bottom: 0;

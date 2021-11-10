@@ -167,6 +167,7 @@ export default {
 .map {
   @include container(0);
   width: 60%;
+  height: 70%;
 
   &__content {
     display: flex;
@@ -182,7 +183,7 @@ export default {
     }
 
     .content__leaflet {
-      border: solid 2px $opac-dark;
+      // border: solid 2px $opac-dark;
 
       &:hover {
         cursor: cell;
