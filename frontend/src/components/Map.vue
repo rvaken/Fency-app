@@ -200,15 +200,14 @@ export default {
       transform: translateX(100%);
       z-index: 998;
 
-      &.active {
-        transform: translateX(0);
-      }
-
       width: 25%;
       min-width: 200px;
       height: 70vh;
-      border: solid 2px $opac-dark;
       background-color: $dark;
+
+      &.active {
+        transform: translateX(0);
+      }
 
       .controller-display {
         border: solid 2px #fff;

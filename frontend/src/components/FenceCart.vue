@@ -7,6 +7,7 @@
 <script>
 export default {
   name: "FenceCart",
+  components: {},
 };
 </script>
 
@@ -18,6 +19,8 @@ export default {
   width: 100%;
   height: 30%;
   background-color: $green;
+  display: flex;
+  flex-direction: row-reverse;
 
   .content {
   }
