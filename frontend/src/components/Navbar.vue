@@ -15,7 +15,6 @@
             v-for="link in links"
             :key="link.id"
             :style="link.active ? activeButton : passiveButton"
-            @click="buttonClick"
           >
             <router-link class="button__link" :key="link.id" :to="link.route">
               <font-awesome-icon
@@ -72,12 +71,7 @@ export default {
     };
   },
 
-  methods: {
-    buttonClick(e) {
-      var targetId = e.target.body.id;
-      console.log(targetId); // returns 'foo'
-    },
-  },
+  methods: {},
 };
 </script>
 

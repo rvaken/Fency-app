@@ -4,11 +4,17 @@
       <div class="content__materials">
         <div class="materials-container">
           <div class="materials-buttons">
-            <div
+            <Material
               v-for="material in materials"
+              @click.native="buttonClick(material.id, material.price)"
               :key="material.id"
+              :name="material.name"
+              :image="material.image"
+              :price="material.price"
+              :color="material.color"
               class="button-item"
-            ></div>
+              :class="{ active: currentActiveButton === material.id }"
+            />
           </div>
         </div>
       </div>
@@ -69,6 +75,7 @@ import { LMap, LTileLayer, LMarker, LPolyline } from "vue2-leaflet";
 import { Icon } from "leaflet";
 import AnimatedNumber from "animated-number-vue";
 import Hamburger from "./Hamburger.vue";
+import Material from "./Material.vue";
 
 delete Icon.Default.prototype._getIconUrl;
 Icon.Default.mergeOptions({
@@ -87,6 +94,7 @@ export default {
     LPolyline,
     AnimatedNumber,
     Hamburger,
+    Material,
   },
 
   data() {
@@ -120,21 +128,50 @@ export default {
         {
           id: 1,
           name: "Wood",
-          image: "wood.jpg",
-          price: "€1/m",
+          image: "wood.svg",
+          price: 11.9,
+          color: "#f07167",
+          active: true,
         },
 
         {
           id: 2,
           name: "Steel",
-          image: "steel.jpg",
-          price: "€10/m",
+          image: "steel.svg",
+          price: 21.9,
+          color: "#fed9b7",
+          active: false,
+        },
+
+        {
+          id: 3,
+          name: "Aluminum",
+          image: "aluminum.svg",
+          price: 26.3,
+          color: "#0081a7",
+          active: false,
+        },
+
+        {
+          id: 4,
+          name: "Brick",
+          image: "brick.svg",
+          price: 40.2,
+          color: "#fdfcdc",
+          active: false,
         },
       ],
+
+      currentActiveButton: 1,
+      currentPrice: 1,
     };
   },
 
   computed: {
+    calcPrice() {
+      return this.distance * this.currentPrice;
+    },
+
     distance() {
       var l = 0;
 
@@ -162,12 +199,19 @@ export default {
   },
 
   methods: {
+    buttonClick(val, pri) {
+      this.currentActiveButton = val;
+      this.currentPrice = pri;
+      console.log(val, pri);
+    },
+
     clearMarkers() {
       this.markers = [];
     },
 
     orderFences() {
       this.$store.dispatch("setLength", this.distance);
+      this.$store.dispatch("setPrice", this.calcPrice);
       this.markers = [];
     },
 
@@ -219,8 +263,20 @@ export default {
       background-color: $opac-dark;
 
       .materials-container {
+        position: relative;
         .materials-buttons {
+          position: absolute;
+          right: 0;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          grid-gap: 15px;
+          margin-right: 15px;
+          margin-top: 15px;
           .button-item {
+            &.active {
+              transform: scale(1.05);
+              border: solid 2px $dark;
+            }
           }
         }
       }
