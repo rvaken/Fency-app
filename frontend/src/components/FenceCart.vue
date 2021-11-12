@@ -1,7 +1,11 @@
 <template>
   <section class="fence-cart">
+    <div class="orders">
+      <Ordermenu class="orders-ordermenu" :class="{ active: orderToggle }" />
+    </div>
     <div class="content">
       <div class="content-price">
+        <h3 class="price-total">Your total is:</h3>
         <div class="price-display">
           <p>
             €
@@ -32,16 +36,19 @@
 
 <script>
 import AnimatedNumber from "animated-number-vue";
+import Ordermenu from "./Ordermenu";
 
 export default {
   name: "FenceCart",
 
   components: {
     AnimatedNumber,
+    Ordermenu,
   },
 
   data() {
     return {
+      orderToggle: false,
       duration: 200,
       icons: [
         {
@@ -64,9 +71,9 @@ export default {
 
   methods: {
     basketClick() {
-      alert("You just ordered €" + this.price.toFixed(2) + " worth of fence!");
       this.$store.dispatch("setPrice", 0);
       this.$store.dispatch("setOrders", []);
+      this.orderToggle = !this.orderToggle;
     },
 
     formatToWholes(number) {
@@ -85,7 +92,18 @@ export default {
   height: 30%;
   background-color: $green;
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
+
+  .orders {
+    height: 90%;
+    width: 100%;
+    position: relative;
+
+    .orders-ordermenu {
+      position: absolute;
+      left: 200px;
+    }
+  }
 
   .content {
     display: flex;
@@ -94,6 +112,15 @@ export default {
     padding: 50px;
 
     .content-price {
+      display: flex;
+      align-items: center;
+
+      .price-total {
+        white-space: nowrap;
+        color: #fff;
+        font-weight: 800;
+        font-size: 40px;
+      }
       .price-display {
         border: solid 2px #fff;
         margin: 25px;
