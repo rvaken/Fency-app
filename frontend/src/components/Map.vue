@@ -6,7 +6,9 @@
           <div class="materials-buttons">
             <Material
               v-for="material in materials"
-              @click.native="buttonClick(material.id, material.price)"
+              @click.native="
+                buttonClick(material.id, material.price, material.name)
+              "
               :key="material.id"
               :name="material.name"
               :image="material.image"
@@ -164,6 +166,7 @@ export default {
 
       currentActiveButton: 1,
       currentPrice: 11.9,
+      currentMaterial: "Wood",
     };
   },
 
@@ -199,9 +202,10 @@ export default {
   },
 
   methods: {
-    buttonClick(val, pri) {
+    buttonClick(val, pri, mat) {
       this.currentActiveButton = val;
       this.currentPrice = pri;
+      this.currentMaterial = mat;
       console.log(val, pri);
     },
 
@@ -212,6 +216,11 @@ export default {
     orderFences() {
       this.$store.dispatch("setLength", this.distance);
       this.$store.dispatch("setPrice", this.calcPrice);
+      this.$store.dispatch("addOrder", {
+        material: this.currentMaterial,
+        price: this.currentPrice * this.distance,
+        amount: this.distance,
+      });
       this.markers = [];
     },
 

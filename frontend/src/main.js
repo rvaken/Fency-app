@@ -10,6 +10,7 @@ import {
   faWarehouse,
   faCopyright,
   faShoppingBasket,
+  faShoppingCart,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { LMap, LTileLayer, LMarker } from "vue2-leaflet";
@@ -21,7 +22,8 @@ library.add(
   faAlignLeft,
   faWarehouse,
   faCopyright,
-  faShoppingBasket
+  faShoppingBasket,
+  faShoppingCart
 );
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 Vue.component("l-map", LMap);

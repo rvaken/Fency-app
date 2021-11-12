@@ -13,7 +13,12 @@
           </p>
         </div>
       </div>
+
       <div class="header-button" @click="basketClick">
+        <div class="header-orders">
+          <p>{{ orderAmt }}</p>
+        </div>
+
         <font-awesome-icon
           class="header-button__icon"
           v-for="icon in icons"
@@ -51,12 +56,16 @@ export default {
     price() {
       return this.$store.getters.getPrice;
     },
+
+    orderAmt() {
+      return this.$store.getters.getOrderAmt;
+    },
   },
 
   methods: {
     basketClick() {
       alert("You just ordered €" + this.price.toFixed(2) + " worth of fence!");
-      this.$store.dispatch("setPrice", 0);
+      this.$store.dispatch("setPrice");
     },
 
     formatToWholes(number) {
@@ -102,12 +111,33 @@ export default {
       transition: 0.3s;
       background-color: greenyellow;
       @include shadow();
+      position: relative;
 
       border-radius: 50%;
       padding: 50px;
       display: flex;
       justify-content: center;
-      align-items: ce;
+
+      .header-orders {
+        top: 5px;
+        right: 5px;
+        position: absolute;
+        background-color: $red;
+        border-radius: 50%;
+        height: 35px;
+        width: 35px;
+        display: flex;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        p {
+          color: #fff;
+          font-family: $main-font;
+          font-size: 14px;
+          font-weight: 600;
+        }
+      }
+
       &__icon {
         height: 40px;
         width: 40px;

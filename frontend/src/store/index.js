@@ -18,6 +18,14 @@ export default new Vuex.Store({
     getPrice: (state) => {
       return state.currentPrice;
     },
+
+    getOrders: (state) => {
+      return state.fenceOrders;
+    },
+
+    getOrderAmt: (state) => {
+      return state.fenceOrders.length;
+    },
   },
 
   mutations: {
@@ -28,6 +36,10 @@ export default new Vuex.Store({
     SET_PRICE(state, value) {
       state.currentPrice = value;
     },
+
+    ADD_ORDER(state, value) {
+      state.fenceOrders.push(value);
+    },
   },
 
   actions: {
@@ -37,6 +49,10 @@ export default new Vuex.Store({
 
     setPrice({ commit }, payload) {
       commit("SET_PRICE", payload);
+    },
+
+    addOrder({ commit }, payload) {
+      commit("ADD_ORDER", payload);
     },
   },
 
