@@ -6,7 +6,6 @@
         <span class="material-txt">{{ material }}</span>
         <span class="amount-txt">&nbsp; for only &nbsp;</span>
         <span class="price-txt">€{{ price }}&nbsp; &nbsp;</span>
-        <span class="price-txt">{{ id }}&nbsp; &nbsp;</span>
       </p>
 
       <font-awesome-icon
