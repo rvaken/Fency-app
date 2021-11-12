@@ -70,12 +70,13 @@ export default {
   flex-direction: column;
   height: 100%;
   overflow-y: scroll;
+  @include shadow();
 
   .order-content {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    align-items: center;
+
     padding: 0;
     margin: 0;
     &__title {
