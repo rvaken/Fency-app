@@ -13,13 +13,12 @@
           </p>
         </div>
       </div>
-      <div class="header-button">
+      <div class="header-button" @click="basketClick">
         <font-awesome-icon
           class="header-button__icon"
           v-for="icon in icons"
           :key="icon.id"
           :icon="icon.el"
-          @click="basketClick"
         />
       </div>
     </div>

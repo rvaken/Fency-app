@@ -130,7 +130,7 @@ export default {
           name: "Wood",
           image: "wood.svg",
           price: 11.9,
-          color: "#f07167",
+          color: "transparent",
           active: true,
         },
 
@@ -139,7 +139,7 @@ export default {
           name: "Steel",
           image: "steel.svg",
           price: 21.9,
-          color: "#fed9b7",
+          color: "transparent",
           active: false,
         },
 
@@ -148,7 +148,7 @@ export default {
           name: "Aluminum",
           image: "aluminum.svg",
           price: 26.3,
-          color: "#0081a7",
+          color: "transparent",
           active: false,
         },
 
@@ -157,7 +157,7 @@ export default {
           name: "Brick",
           image: "brick.svg",
           price: 40.2,
-          color: "#fdfcdc",
+          color: "transparent",
           active: false,
         },
       ],
@@ -267,15 +267,18 @@ export default {
         .materials-buttons {
           position: absolute;
           right: 0;
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          grid-gap: 15px;
-          margin-right: 15px;
-          margin-top: 15px;
+          display: flex;
+          flex-direction: column;
+
           .button-item {
+            border-bottom: solid 1px black;
+
+            &:nth-last-child(1) {
+              border: none;
+            }
+
             &.active {
-              transform: scale(1.05);
-              border: solid 2px $dark;
+              border-right: solid 10px $red;
             }
           }
         }

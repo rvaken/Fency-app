@@ -5,10 +5,10 @@
         class="content-image"
         :src="require('@/assets/images/materials/' + image + '')"
       />
-      <p class="content-name">{{ name }}</p>
       <p>
         <span>€{{ price }}/m</span>
       </p>
+      <p class="content-name">{{ name }}</p>
     </div>
   </section>
 </template>
@@ -48,19 +48,26 @@ export default {
 
 <style lang="scss">
 .material {
-  transition: 0.3s;
   .content {
     display: flex;
-    flex-direction: column;
-    padding: 25px;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 25px;
+    max-width: 300px;
 
     .content-image {
+      // -webkit-filter: grayscale(100%);
+      // filter: grayscale(100%);
+      width: 20%;
+      margin-left: 15px;
     }
 
     .content-name {
       font-weight: 800;
       margin: 0;
       padding: 5px;
+      margin-left: 15px;
     }
 
     span {
@@ -68,8 +75,8 @@ export default {
   }
 
   &:hover {
-    transform: scale(1.05);
-    transition: 0.3s;
+    border-right: solid 10px $red;
+    @include shadow();
     cursor: pointer;
   }
 }
