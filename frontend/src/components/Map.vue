@@ -42,7 +42,7 @@
         ></l-marker>
       </l-map>
 
-      <div :class="{ active: menu_toggle }" class="content__controller">
+      <div :class="{ active: !menu_toggle }" class="content__controller">
         <div class="controller-display">
           <p>
             <animated-number
@@ -163,13 +163,13 @@ export default {
       ],
 
       currentActiveButton: 1,
-      currentPrice: 1,
+      currentPrice: 11.9,
     };
   },
 
   computed: {
     calcPrice() {
-      return this.distance * this.currentPrice;
+      return this.currentPrice * this.distance + this.$store.getters.getPrice;
     },
 
     distance() {
