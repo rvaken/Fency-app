@@ -44,6 +44,10 @@ export default new Vuex.Store({
     ADD_ORDER(state, value) {
       state.fenceOrders.push(value);
     },
+
+    DELETE_ORDER(state, id) {
+      state.fenceOrders.splice(id, 1);
+    },
   },
 
   actions: {
@@ -61,6 +65,10 @@ export default new Vuex.Store({
 
     addOrder({ commit }, payload) {
       commit("ADD_ORDER", payload);
+    },
+
+    deleteOrder({ commit }, payload) {
+      commit("DELETE_ORDER", payload);
     },
   },
 

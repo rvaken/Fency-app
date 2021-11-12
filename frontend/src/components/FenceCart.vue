@@ -95,7 +95,7 @@ export default {
   flex-direction: row;
 
   .orders {
-    height: 90%;
+    height: 75%;
     width: 100%;
     position: relative;
 

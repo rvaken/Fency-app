@@ -5,8 +5,15 @@
         <span class="amount-txt">{{ amount }}m &nbsp;</span>
         <span class="material-txt">{{ material }}</span>
         <span class="amount-txt">&nbsp; for only &nbsp;</span>
-        <span class="price-txt">€{{ price }}</span>
+        <span class="price-txt">€{{ price }}&nbsp; &nbsp;</span>
       </p>
+      <font-awesome-icon
+        class="item-icon"
+        v-for="icon in icons"
+        :key="icon.id"
+        :icon="icon.el"
+        @click="deleteOrder()"
+      />
     </div>
   </section>
 </template>
@@ -14,6 +21,17 @@
 <script>
 export default {
   name: "Orderitem",
+
+  data() {
+    return {
+      icons: [
+        {
+          id: 1,
+          el: "times-circle",
+        },
+      ],
+    };
+  },
 
   props: {
     material: {
@@ -30,6 +48,18 @@ export default {
       type: String,
       default: "10",
     },
+
+    id: {
+      type: Number,
+      default: 1,
+    },
+  },
+
+  methods: {
+    deleteOrder() {
+      this.$store.dispatch("deleteOrder", 0);
+      console.log("test");
+    },
   },
 };
 </script>
@@ -39,7 +69,7 @@ export default {
   .item-content {
     display: flex;
     justify-content: space-between;
-
+    align-items: center;
     p {
       .amount-txt {
       }
@@ -48,6 +78,15 @@ export default {
       }
       .material-txt {
         font-weight: 600;
+      }
+    }
+
+    .item-icon {
+      color: $red;
+
+      &:hover {
+        opacity: 0.4;
+        cursor: pointer;
       }
     }
   }
