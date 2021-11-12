@@ -37,6 +37,10 @@ export default new Vuex.Store({
       state.currentPrice = value;
     },
 
+    SET_ORDERS(state, value) {
+      state.fenceOrders = value;
+    },
+
     ADD_ORDER(state, value) {
       state.fenceOrders.push(value);
     },
@@ -49,6 +53,10 @@ export default new Vuex.Store({
 
     setPrice({ commit }, payload) {
       commit("SET_PRICE", payload);
+    },
+
+    setOrders({ commit }, payload) {
+      commit("SET_ORDERS", payload);
     },
 
     addOrder({ commit }, payload) {

@@ -65,7 +65,8 @@ export default {
   methods: {
     basketClick() {
       alert("You just ordered €" + this.price.toFixed(2) + " worth of fence!");
-      this.$store.dispatch("setPrice");
+      this.$store.dispatch("setPrice", 0);
+      this.$store.dispatch("setOrders", []);
     },
 
     formatToWholes(number) {
