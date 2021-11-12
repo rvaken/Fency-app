@@ -167,6 +167,7 @@ export default {
       currentActiveButton: 1,
       currentPrice: 11.9,
       currentMaterial: "Wood",
+      orderId: 0,
     };
   },
 
@@ -217,10 +218,13 @@ export default {
       this.$store.dispatch("setLength", this.distance);
       this.$store.dispatch("setPrice", this.calcPrice);
       this.$store.dispatch("addOrder", {
+        id: this.orderId,
         material: this.currentMaterial,
         price: this.currentPrice * this.distance,
         amount: this.distance,
       });
+      this.orderId += 1;
+
       this.markers = [];
     },
 
@@ -287,7 +291,7 @@ export default {
             }
 
             &.active {
-              border-right: solid 10px $red;
+              border-right: solid 10px $dark;
             }
           }
         }

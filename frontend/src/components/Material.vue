@@ -75,7 +75,7 @@ export default {
   }
 
   &:hover {
-    border-right: solid 10px $red;
+    border-right: solid 10px $dark;
     @include shadow();
     cursor: pointer;
   }

@@ -1,7 +1,7 @@
 <template>
   <section class="order-menu">
     <div class="order-content">
-      <h2 class="order-content__title">Order summary</h2>
+      <h2 class="order-content__title">Orders</h2>
       <div class="sad-wrapper" v-if="sadIcon">
         <font-awesome-icon
           class="sad-wrapper__icon"
@@ -9,7 +9,7 @@
           :key="icon.id"
           :icon="icon.el"
         />
-        <p>You have nog orders yet</p>
+        <p>You have no orders yet</p>
       </div>
       <Orderitem
         class="content-orderitem"

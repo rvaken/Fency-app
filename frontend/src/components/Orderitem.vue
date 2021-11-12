@@ -6,13 +6,13 @@
         <span class="material-txt">{{ material }}</span>
         <span class="amount-txt">&nbsp; for only &nbsp;</span>
         <span class="price-txt">€{{ price }}&nbsp; &nbsp;</span>
+        <span class="price-txt">{{ id }}&nbsp; &nbsp;</span>
       </p>
+
       <font-awesome-icon
+        @click="deleteOrder(id)"
         class="item-icon"
-        v-for="icon in icons"
-        :key="icon.id"
-        :icon="icon.el"
-        @click="deleteOrder()"
+        icon="times-circle"
       />
     </div>
   </section>
@@ -23,14 +23,7 @@ export default {
   name: "Orderitem",
 
   data() {
-    return {
-      icons: [
-        {
-          id: 1,
-          el: "times-circle",
-        },
-      ],
-    };
+    return {};
   },
 
   props: {
@@ -51,14 +44,15 @@ export default {
 
     id: {
       type: Number,
-      default: 1,
+      default: 0,
     },
   },
 
+  computed: {},
+
   methods: {
-    deleteOrder() {
-      this.$store.dispatch("deleteOrder", 0);
-      console.log("test");
+    deleteOrder(e) {
+      this.$store.dispatch("deleteOrder", e);
     },
   },
 };

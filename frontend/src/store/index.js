@@ -45,8 +45,8 @@ export default new Vuex.Store({
       state.fenceOrders.push(value);
     },
 
-    DELETE_ORDER(state, id) {
-      state.fenceOrders.splice(id, 1);
+    DELETE_ORDER(state, x) {
+      state.fenceOrders.splice(x, 1);
     },
   },
 
