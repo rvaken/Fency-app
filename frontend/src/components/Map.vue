@@ -283,7 +283,7 @@ export default {
             border-bottom: solid 1px black;
 
             &:nth-last-child(1) {
-              border: none;
+              border-bottom: none;
             }
 
             &.active {
