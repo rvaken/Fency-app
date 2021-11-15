@@ -1,5 +1,5 @@
 <template>
-  <section class="modal">
+  <section v-if="extraToggle" class="modal">
     <div class="content">
       <h2 class="content__title">Suggestions</h2>
       <div class="content__text">
@@ -8,7 +8,9 @@
         <p>&nbsp;poles</p>
       </div>
       <div class="buttons">
-        <div class="cancel-button"><p>cancel</p></div>
+        <div @click="extraToggle = !extraToggle" class="cancel-button">
+          <p>cancel</p>
+        </div>
         <div @click="orderPole" class="order-button"><p>Buy!</p></div>
       </div>
     </div>
@@ -23,6 +25,11 @@ export default {
     poles: {
       type: Number,
       default: 0,
+    },
+
+    extraToggle: {
+      type: Boolean,
+      default: true,
     },
   },
 

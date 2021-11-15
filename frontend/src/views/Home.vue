@@ -15,14 +15,22 @@ import FenceCart from "../components/FenceCart.vue";
 export default {
   name: "Home",
   components: { Map, FenceCart },
+
+  computed: {},
 };
 </script>
 
 <style lang="scss">
 @import "@/assets/imports/variables.scss";
 
+body {
+  cursor: default;
+}
+
 .home {
   padding: 0;
+  position: relative;
+
   .cart {
   }
 
