@@ -114,7 +114,7 @@ export default {
 
     .orders-extramenu {
       position: absolute;
-      left: 600px;
+      left: 750px;
     }
   }
 
