@@ -154,17 +154,6 @@ export default {
       });
   },
 
-  fetchData() {
-    let JWT = localStorage.getItem("fencyJWT");
-    let auth = "Bearer " + JWT;
-    fetch("http://localhost:8000/api/fences/" + "?XDEBUG_SESSION_START=1", {
-      method: "GET",
-      headers: {
-        Authorization: auth,
-      },
-    }).then((response) => response.json());
-  },
-
   computed: {
     calcPrice() {
       return this.currentPrice * this.distance + this.$store.getters.getPrice;
