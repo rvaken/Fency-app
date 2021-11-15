@@ -6,6 +6,8 @@ namespace Fency\DB;
 
 use \Fency\DB\DB;
 
+use function DI\value;
+
 class FencesDB
 {
     protected $db;
@@ -35,7 +37,19 @@ class FencesDB
     {
         $fences = [];
         $errors = [];
-        $fenceAmt = 4;
+        $fenceAmt = 0;
+
+        try {
+            $stmt = $this->db->prepare("SELECT COUNT (fences_id) from fences");
+            $res = $stmt->execute();
+            if ($res) {
+                $row = $res->fetchArray(SQLITE3_ASSOC);
+                $arr =  array_values($row);
+                $fenceAmt =  $arr[0];
+            }
+        } catch (\Throwable $th) {
+            $errors[0] = $this->db->lastErrorMsg();
+        }
 
         for ($x = 1; $x <  $fenceAmt + 1; $x++) {
 
