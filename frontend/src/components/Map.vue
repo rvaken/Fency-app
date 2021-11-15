@@ -128,45 +128,9 @@ export default {
         },
       ],
 
-      materials: [
-        {
-          id: 1,
-          name: "Wood",
-          image: "wood.svg",
-          price: 11.9,
-          color: "transparent",
-          active: true,
-        },
+      materials: [],
 
-        {
-          id: 2,
-          name: "Steel",
-          image: "steel.svg",
-          price: 21.9,
-          color: "transparent",
-          active: false,
-        },
-
-        {
-          id: 3,
-          name: "test",
-          image: "aluminum.svg",
-          price: 26.3,
-          color: "transparent",
-          active: false,
-        },
-
-        {
-          id: 4,
-          name: "Brick",
-          image: "brick.svg",
-          price: 40.2,
-          color: "transparent",
-          active: false,
-        },
-      ],
-
-      currentActiveButton: 1,
+      currentActiveButton: 0,
       currentPrice: 11.9,
       currentMaterial: "Wood",
       orderId: 0,
@@ -178,8 +142,11 @@ export default {
       .get(`/fences?XDEBUG_SESSION_START=1`)
       .then((response) => {
         Object.values(response.data).forEach((val, index) => {
-          this.materials[index]["name"] = val.name;
-          this.materials[index]["price"] = Number(val.price);
+          this.materials.push({
+            name: val.name,
+            price: val.price,
+            id: index,
+          });
         });
       })
       .catch(function (error) {

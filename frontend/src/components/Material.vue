@@ -1,10 +1,6 @@
 <template>
   <section class="material">
     <div class="content" :style="background">
-      <img
-        class="content-image"
-        :src="require('@/assets/images/materials/' + image + '')"
-      />
       <p>
         <span>€{{ price }}/m</span>
       </p>
@@ -18,11 +14,6 @@ export default {
   name: "Material",
 
   props: {
-    image: {
-      type: String,
-      default: "steel.svg",
-    },
-
     color: {
       type: String,
       default: "$green",
