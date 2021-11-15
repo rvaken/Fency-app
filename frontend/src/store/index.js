@@ -45,8 +45,12 @@ export default new Vuex.Store({
       state.fenceOrders.push(value);
     },
 
-    DELETE_ORDER(state, x) {
-      state.fenceOrders.splice(x, 1);
+    DELETE_ORDER(state, order) {
+      const index = state.fenceOrders.indexOf(order);
+
+      if (index > -1) {
+        state.fenceOrders.splice(index, 1);
+      }
     },
   },
 

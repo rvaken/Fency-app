@@ -19,6 +19,7 @@
         :price="order.price.toFixed(2)"
         :material="order.material"
         :amount="order.amount"
+        :order="order"
       />
     </div>
   </section>

@@ -9,7 +9,7 @@
       </p>
 
       <font-awesome-icon
-        @click="deleteOrder(id)"
+        @click="deleteOrder(order)"
         class="item-icon"
         icon="times-circle"
       />
@@ -45,12 +45,18 @@ export default {
       type: Number,
       default: 0,
     },
+
+    order: {
+      type: Object,
+    },
   },
 
   computed: {},
 
   methods: {
     deleteOrder(e) {
+      console.log(e);
+
       this.$store.dispatch("deleteOrder", e);
     },
   },
