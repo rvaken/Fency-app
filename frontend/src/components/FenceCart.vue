@@ -2,7 +2,9 @@
   <section class="fence-cart">
     <div class="orders">
       <Ordermenu class="orders-ordermenu" :class="{ active: orderToggle }" />
+      <Extramenu :poles="poles" class="orders-extramenu" />
     </div>
+
     <div class="content">
       <div class="content-price">
         <h3 class="price-total">Your total is:</h3>
@@ -37,6 +39,7 @@
 <script>
 import AnimatedNumber from "animated-number-vue";
 import Ordermenu from "./Ordermenu";
+import Extramenu from "./Extramenu";
 
 export default {
   name: "FenceCart",
@@ -44,6 +47,7 @@ export default {
   components: {
     AnimatedNumber,
     Ordermenu,
+    Extramenu,
   },
 
   data() {
@@ -66,6 +70,10 @@ export default {
 
     orderAmt() {
       return this.$store.getters.getOrderAmt;
+    },
+
+    poles() {
+      return this.$store.getters.getPoles;
     },
   },
 
@@ -102,6 +110,11 @@ export default {
     .orders-ordermenu {
       position: absolute;
       left: 200px;
+    }
+
+    .orders-extramenu {
+      position: absolute;
+      left: 600px;
     }
   }
 

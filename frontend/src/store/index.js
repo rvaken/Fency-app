@@ -8,11 +8,16 @@ export default new Vuex.Store({
     length: 0,
     currentPrice: 0,
     fenceOrders: [],
+    poles: 0,
   },
 
   getters: {
     getLength: (state) => {
       return state.length;
+    },
+
+    getPoles: (state) => {
+      return state.poles;
     },
 
     getPrice: (state) => {
@@ -45,6 +50,10 @@ export default new Vuex.Store({
       state.fenceOrders = value;
     },
 
+    SET_POLES(state, value) {
+      state.poles = value;
+    },
+
     ADD_ORDER(state, value) {
       state.fenceOrders.push(value);
     },
@@ -69,6 +78,10 @@ export default new Vuex.Store({
 
     setOrders({ commit }, payload) {
       commit("SET_ORDERS", payload);
+    },
+
+    setPoles({ commit }, payload) {
+      commit("SET_POLES", payload);
     },
 
     addOrder({ commit }, payload) {

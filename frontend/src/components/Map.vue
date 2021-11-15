@@ -103,6 +103,7 @@ export default {
 
   data() {
     return {
+      modalToggle: false,
       zoom: 18,
       center: [51.0543, 3.7174],
       url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
@@ -197,17 +198,20 @@ export default {
     },
 
     orderFences() {
-      this.$store.dispatch("setLength", this.distance);
-      this.$store.dispatch("setPrice", this.calcPrice);
-      this.$store.dispatch("addOrder", {
-        id: this.orderId,
-        material: this.currentMaterial,
-        price: this.currentPrice * this.distance,
-        amount: this.distance,
-      });
-      this.orderId += 1;
-
-      this.markers = [];
+      if (this.distance > 0) {
+        this.$store.dispatch("setLength", this.distance);
+        this.$store.dispatch("setPrice", this.calcPrice);
+        this.$store.dispatch("setPoles", this.markers.length);
+        this.$store.dispatch("addOrder", {
+          id: this.orderId,
+          material: this.currentMaterial,
+          price: this.currentPrice * this.distance,
+          amount: parseInt(this.distance),
+        });
+        this.orderId += 1;
+        this.modalToggle = !this.modalToggle;
+        this.markers = [];
+      }
     },
 
     closeFence() {
@@ -234,6 +238,7 @@ export default {
   @include container(0);
   width: 60%;
   height: 70%;
+  position: relative;
 
   &__content {
     display: flex;

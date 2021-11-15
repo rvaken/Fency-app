@@ -37,8 +37,8 @@ export default {
     },
 
     amount: {
-      type: String,
-      default: "10",
+      type: Number,
+      default: 10,
     },
 
     id: {
