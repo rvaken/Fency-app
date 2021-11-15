@@ -10,14 +10,14 @@ class FencesDB
 {
     protected $db;
 
+
     public function __construct(DB $db)
     {
         $this->db = $db;
     }
 
-    private function getFenceAmt()
+    public function getFenceAmt()
     {
-
         $sql = "SELECT COUNT (fences_id) from fences";
         $stmt = $this->db->prepare($sql);
         $res = $stmt->execute();
@@ -36,7 +36,6 @@ class FencesDB
         $fences = [];
         $errors = [];
         $fenceAmt = 4;
-
 
         for ($x = 1; $x <  $fenceAmt + 1; $x++) {
 

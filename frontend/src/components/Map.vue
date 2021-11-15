@@ -79,6 +79,8 @@ import AnimatedNumber from "animated-number-vue";
 import Hamburger from "./Hamburger.vue";
 import Material from "./Material.vue";
 
+import axios from "axios";
+
 delete Icon.Default.prototype._getIconUrl;
 Icon.Default.mergeOptions({
   iconRetinaUrl: require("@/assets/images/marker-icon.svg"),
@@ -147,7 +149,7 @@ export default {
 
         {
           id: 3,
-          name: "Aluminum",
+          name: "test",
           image: "aluminum.svg",
           price: 26.3,
           color: "transparent",
@@ -169,6 +171,31 @@ export default {
       currentMaterial: "Wood",
       orderId: 0,
     };
+  },
+
+  created() {
+    axios
+      .get(`/fences?XDEBUG_SESSION_START=1`)
+      .then((response) => {
+        Object.values(response.data).forEach((val, index) => {
+          this.materials[index]["name"] = val.name;
+          this.materials[index]["price"] = Number(val.price);
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  },
+
+  fetchData() {
+    let JWT = localStorage.getItem("fencyJWT");
+    let auth = "Bearer " + JWT;
+    fetch("http://localhost:8000/api/fences/" + "?XDEBUG_SESSION_START=1", {
+      method: "GET",
+      headers: {
+        Authorization: auth,
+      },
+    }).then((response) => response.json());
   },
 
   computed: {
@@ -207,7 +234,6 @@ export default {
       this.currentActiveButton = val;
       this.currentPrice = pri;
       this.currentMaterial = mat;
-      console.log(val, pri);
     },
 
     clearMarkers() {
