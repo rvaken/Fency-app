@@ -16,7 +16,11 @@ export default new Vuex.Store({
     },
 
     getPrice: (state) => {
-      return state.currentPrice;
+      let z = 0;
+      for (var x = 0; x < state.fenceOrders.length; x++) {
+        z += state.fenceOrders[x].price;
+      }
+      return z;
     },
 
     getOrders: (state) => {
