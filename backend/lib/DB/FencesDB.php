@@ -1,5 +1,7 @@
 <?php
 
+
+
 namespace Fency\DB;
 
 use \Fency\DB\DB;
@@ -13,46 +15,72 @@ class FencesDB
         $this->db = $db;
     }
 
-    public function getFences()
+    private function getFenceAmt()
     {
-        $stat_queries = [
-            "names" => [
-                "label" => 'name',
-                "qry" => "SELECT COUNT (category) as coffees FROM products WHERE category IS 'coffee'"
-            ],
-            "prices" => [
-                "label" => 'price',
-                "qry" => "SELECT COUNT (category) as teas FROM products WHERE category IS 'tea'"
-            ],
-            "widths" => [
-                "label" => 'width',
-                "qry" => "SELECT COUNT (role_id) as customers FROM users WHERE role_id IS '0'"
-            ],
-            "materials" => [
-                "label" => 'material',
-                "qry" => "SELECT COUNT (role_id) as employees FROM users WHERE role_id IS '1' "
-            ],
-            "stock" => [
-                "label" => 'stock',
-                "qry" => "SELECT COUNT (role_id) as employees FROM users WHERE role_id IS '1' "
-            ],
-        ];
 
+        $sql = "SELECT COUNT (fences_id) from fences";
+        $stmt = $this->db->prepare($sql);
+        $res = $stmt->execute();
+
+        if ($row = $res->fetchArray(SQLITE3_ASSOC)) {
+            $data = $row;
+        };
+
+        return $data;
+    }
+
+
+    public function getFences()
+
+    {
         $fences = [];
         $errors = [];
+        $fenceAmt = 4;
 
-        foreach ($stat_queries as $key => $value) {
-            try {
-                $stmt = $this->db->prepare($value['qry']);
 
-                $res = $stmt->execute();
-                if ($row = $res->fetchArray(SQLITE3_ASSOC)) {
-                    $stats[$key] = $row[$key];
-                };
-            } catch (\Throwable $th) {
-                $errors[$value[0]] = $this->db->lastErrorMsg();
+        for ($x = 1; $x <  $fenceAmt + 1; $x++) {
+
+
+            $fence_queries = [
+                "name" => [
+                    "label" => 'name',
+                    "qry" => "SELECT name FROM fences where fences_id IS $x"
+                ],
+                "price" => [
+                    "label" => 'price',
+                    "qry" => "SELECT price FROM fences where fences_id IS $x"
+                ],
+                "width" => [
+                    "label" => 'width',
+                    "qry" => "SELECT width FROM fences where fences_id IS $x"
+                ],
+                "material" => [
+                    "label" => 'material',
+                    "qry" => "SELECT material FROM fences where fences_id IS $x"
+                ],
+                "stock" => [
+                    "label" => 'stock',
+                    "qry" => "SELECT stock FROM fences where fences_id IS $x"
+                ],
+            ];
+
+            $fences_catcher = [];
+
+            foreach ($fence_queries as $key => $value) {
+                try {
+                    $stmt = $this->db->prepare($value['qry']);
+                    $res = $stmt->execute();
+
+                    if ($row = $res->fetchArray(SQLITE3_ASSOC)) {
+                        $fences_catcher[$key] = $row[$key];
+                    };
+                } catch (\Throwable $th) {
+                    $errors[$value[0]] = $this->db->lastErrorMsg();
+                }
             }
-        }
+            array_push($fences, $fences_catcher);
+        };
+
 
         if (empty($errors)) {
             return $fences;

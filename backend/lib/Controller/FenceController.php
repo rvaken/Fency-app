@@ -3,6 +3,7 @@
 namespace Fency\Controller;
 
 use Fency\DB\DB;
+use DI\Container;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Container\ContainerInterface;
@@ -14,8 +15,8 @@ class FenceController
     protected $container;
 
     public function __construct(ContainerInterface $container)
-
     {
+
         $this->container = $container;
         $this->db = $this->container->get('db');
     }
